@@ -2,6 +2,12 @@
   Notes
 </h1>
 
+<h3 align="center">
+  <a href="https://notes-react-rho.vercel.app" target="_blank">Live Preview</a>
+</h3>
+
+<br>
+
 <p align="center">
   <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=49AA26&labelColor=000000">
 </p>
