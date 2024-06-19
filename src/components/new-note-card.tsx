@@ -10,7 +10,7 @@ interface NewNoteCardProps {
 const SpeechRecognitionAPI =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
-const speechRecognition = new SpeechRecognitionAPI();
+let speechRecognition: SpeechRecognition | null = null
 
 export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
   const [shouldShowOnboarding, setShouldShowOnboarding] = useState(true)
@@ -56,11 +56,13 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
     setIsRecording(true)
     setShouldShowOnboarding(false)
 
+    speechRecognition = new SpeechRecognitionAPI();
+
     speechRecognition.lang = 'pt-BR'
     speechRecognition.continuous = true
     speechRecognition.maxAlternatives = 1
     speechRecognition.interimResults = true
-    
+
     speechRecognition.onresult = (event) => {
       const transcription = Array.from(event.results).reduce((text, result) => {
         return text.concat(result[0].transcript)
@@ -125,7 +127,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
                   onClick={handleStopRecording}
                   className='w-full flex items-center justify-center gap-2 bg-zinc-900 py-4 text-center text-sm text-zinc-300 outline-none font-medium hover:text-slate-100'
                 >
-                  <div className='size-3 rounded-full bg-red-500 animate-pulse'/>
+                  <div className='size-3 rounded-full bg-red-500 animate-pulse' />
                   Recording! (click to stop)
                 </button>
 
